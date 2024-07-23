@@ -26,7 +26,7 @@ exports.conversation = async (req, res) => {
       // ----------------------------------------------------------------------
       let promptText = ""
       if(language){
-        promptText += `Answer in '${language}'.`
+        promptText += `Answer in language '${language}'.`
       }
       if (prompt_id) {
         //chèn thêm thông tin ptompt
