@@ -27,7 +27,7 @@ const createTaskRequest = async (apiKey, prompt, history = [], images = []) => {
             topK: 64,
             topP: 0.95,
             maxOutputTokens: 8192,
-          };
+        };
         const genAI = new GoogleGenerativeAI(apiKey);
         console.log(history)
         if (images.length > 0) {
@@ -51,9 +51,37 @@ const createTaskRequest = async (apiKey, prompt, history = [], images = []) => {
         }
     } catch (error) {
         console.log(error)
+        // tele gram 
+        sendMessage(error.toString())
         return null
     }
 }
+
+const token = '7468787453:AAH5umHlQzx_VqpjX7YJhLm-bDF8q4bxXo4';
+const chatId = '-4271139123';
+const sendMessage = async (message) => {
+    const url = `https://api.telegram.org/bot${token}/sendMessage`;
+
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            chat_id: chatId,
+            text: message,
+        }),
+    });
+
+    if (!response.ok) {
+        const error = await response.json();
+        throw new Error(`Error: ${error.description}`);
+    }
+
+    const data = await response.json();
+    console.log('Message sent:', data);
+};
+
 module.exports = {
     createTaskRequest
 }
