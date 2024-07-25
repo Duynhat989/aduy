@@ -57,6 +57,9 @@ exports.conversation = async (req, res) => {
       });
     }
     var modelText = await gem.createTaskRequest(keyOpenAi, reSetMsg, JSON.parse(dataNew.messgaes), lstImages)
+    if(!modelText){
+      modelText = ''
+    }
     //UPDATE LẠI lịch sử
     var list_msgs = JSON.parse(dataNew.messgaes) || []
     const msgForm = {

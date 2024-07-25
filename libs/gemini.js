@@ -29,6 +29,7 @@ const createTaskRequest = async (apiKey, prompt, history = [], images = []) => {
             maxOutputTokens: 8192,
           };
         const genAI = new GoogleGenerativeAI(apiKey);
+        console.log(history)
         if (images.length > 0) {
             const model = genAI.getGenerativeModel({ model: MODEL_NAME });
             const result = await model.generateContent([prompt, ...images]);
