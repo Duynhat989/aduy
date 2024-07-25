@@ -73,7 +73,7 @@ exports.conversation = async (req, res) => {
       parts: [{ text: modelText }],
     }
     if (list_msgs.length != 1) {
-      list_msgs[1].parts.push({ text: reSetMsg })
+      list_msgs[1].parts.push({ text: modelText })
     } else {
       list_msgs.push(msgFormModel)
     }
