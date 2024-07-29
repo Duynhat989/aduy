@@ -19,7 +19,7 @@ const safetySettings = [
         threshold: HarmBlockThreshold.BLOCK_NONE,
     },
 ];
-const MODEL_NAME = "gemini-1.5-pro-latest";
+const MODEL_NAME = "gemini-1.5-flash";
 const createTaskRequest = async (apiKey, prompt, history = [], images = []) => {
     try {
         const generationConfig = {
@@ -40,11 +40,11 @@ const createTaskRequest = async (apiKey, prompt, history = [], images = []) => {
             const text = response.text();
             return text
         } else {
-            console.log('3434')
+            // console.log('3434')
             const model = genAI.getGenerativeModel({
-                model: "gemini-1.0-pro-001",
-                tools: [{ codeExecution: {} }]
-            });
+                model: "gemini-1.5-flash",
+                tools: [{codeExecution: {}}],
+              });
             const chat = model.startChat({
                 history: history,
                 generationConfig: generationConfig,
