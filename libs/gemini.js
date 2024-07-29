@@ -31,14 +31,20 @@ const createTaskRequest = async (apiKey, prompt, history = [], images = []) => {
         const genAI = new GoogleGenerativeAI(apiKey);
         console.log(history)
         if (images.length > 0) {
-            const model = genAI.getGenerativeModel({ model: MODEL_NAME });
+            const model = genAI.getGenerativeModel({
+                model: MODEL_NAME,
+                tools: [{ codeExecution: {} }],
+            });
             const result = await model.generateContent([prompt, ...images]);
             const response = await result.response;
             const text = response.text();
             return text
         } else {
             console.log('3434')
-            const model = genAI.getGenerativeModel({ model: "gemini-1.0-pro-001" });
+            const model = genAI.getGenerativeModel({
+                model: "gemini-1.0-pro-001",
+                tools: [{ codeExecution: {} }]
+            });
             const chat = model.startChat({
                 history: history,
                 generationConfig: generationConfig,
