@@ -66,20 +66,22 @@ exports.conversation = async (req, res) => {
       role: "user",
       parts: [{ text: reSetMsg }],
     }
-    if (list_msgs.length != 0) {
-      list_msgs[0].parts.push({ text: reSetMsg })
-    } else {
-      list_msgs.push(msgForm)
-    }
+    // if (list_msgs.length != 0) {
+    //   list_msgs[0].parts.push({ text: reSetMsg })
+    // } else {
+    //   list_msgs.push(msgForm)
+    // }
+    list_msgs.push(msgForm)
     const msgFormModel = {
       role: "model",
       parts: [{ text: modelText }],
     }
-    if (list_msgs.length != 1) {
-      list_msgs[1].parts.push({ text: modelText })
-    } else {
-      list_msgs.push(msgFormModel)
-    }
+    // if (list_msgs.length != 1) {
+    //   list_msgs[1].parts.push({ text: modelText })
+    // } else {
+    //   list_msgs.push(msgFormModel)
+    // }
+    list_msgs.push(msgFormModel)
     chat.update(JSON.stringify(list_msgs), id_object)
     res.status(200).send({
       status: true,
