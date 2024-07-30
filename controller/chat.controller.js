@@ -34,9 +34,9 @@ exports.conversation = async (req, res) => {
         if (props.form_submit) {
           promptText += props.form_submit
         }
-        console.log(promptText)
+        // console.log(promptText)
       }
-      reSetMsg = `.[***]  ${reSetMsg} [***]${promptText}`
+      reSetMsg = `${reSetMsg} [***]${promptText}`
       var temp = await chat.register(id_object, user_id, JSON.stringify(msgForm))
     }
     //hoàn thanh update lịch sử
