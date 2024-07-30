@@ -26,7 +26,7 @@ exports.conversation = async (req, res) => {
       // ----------------------------------------------------------------------
       let promptText = ""
       if(language){
-        promptText += `Answer in language '${language}'.`
+        // promptText += `Answer in language '${language}'.`
       }
       if (prompt_id) {
         //chèn thêm thông tin ptompt
@@ -36,7 +36,7 @@ exports.conversation = async (req, res) => {
         }
         console.log(promptText)
       }
-      reSetMsg = `${promptText}.Focus on the content of the question:[***]  ${reSetMsg}`
+      reSetMsg = `.[***]  ${reSetMsg} [***]${promptText}`
       var temp = await chat.register(id_object, user_id, JSON.stringify(msgForm))
     }
     //hoàn thanh update lịch sử

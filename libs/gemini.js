@@ -29,7 +29,7 @@ const createTaskRequest = async (apiKey, prompt, history = [], images = []) => {
             maxOutputTokens: 8192,
         };
         const genAI = new GoogleGenerativeAI(apiKey);
-        console.log(history)
+        // console.log(history)
         if (images.length > 0) {
             const model = genAI.getGenerativeModel({
                 model: MODEL_NAME,
@@ -48,14 +48,20 @@ const createTaskRequest = async (apiKey, prompt, history = [], images = []) => {
             const chat = model.startChat({
                 history: history,
                 generationConfig: generationConfig,
-                safetySettings
+                safetySettings,
+                tools: [
+                    {
+                      codeExecution: {},
+                    },
+                  ],
             });
             const result = await chat.sendMessage(prompt);
             const response = await result.response;
             const text = response.text();
+            // console.log(text)
             return text
         }
-    } catch (error) {
+    } catch (error) {+
         console.log(error)
         // tele gram 
         sendMessage(error.toString())
